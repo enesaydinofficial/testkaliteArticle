@@ -2,6 +2,7 @@ package TestPackage;
 
 import PageElements.MainPage;
 import PageElements.iletisimPage;
+import org.openqa.selenium.Platform;
 import Shared.Utils;
 import org.junit.After;
 import org.junit.Assert;
@@ -19,20 +20,19 @@ import java.util.List;
 
 public class sampleTestClass {
 
-    protected static WebDriver driver;
-    private static String OS = System.getProperty("os.name").toUpperCase();
-
+    private static WebDriver driver;
 
     @Before
     public void Init() {
 
-        if (OS.contains("MAC OS X")) {
+        if (Platform.getCurrent().is(Platform.MAC)) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver");
-        } else if (OS.contains("WİNDOWS 10")) {
+        } else if (Platform.getCurrent().is(Platform.WIN10)) {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/drivers/chromedriver.exe");
         }
 
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
 
     }
 
